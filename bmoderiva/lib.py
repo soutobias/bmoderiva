@@ -3,11 +3,9 @@ import numpy as np
 import requests
 from bmoderiva.distance import haversine
 import folium
-import plotly.express as px
 from streamlit_folium import folium_static
 import streamlit as st
 from datetime import datetime, timedelta
-import plotly.graph_objects as go
 
 def get_data(token):
     time_now = (datetime.utcnow() + timedelta(days=1)).strftime('%Y-%m-%d')
