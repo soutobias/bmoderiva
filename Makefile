@@ -1,6 +1,13 @@
+HEROKU_EMAIL_ADDRESS=tobias.ramalho.ferreira@gmail.com
+
+
 # ----------------------------------
 #          INSTALL & TEST
 # ----------------------------------
+
+run_streamlit:
+    streamlit run app.py
+
 install_requirements:
 	@pip install -r requirements.txt
 

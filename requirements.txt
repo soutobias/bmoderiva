@@ -7,7 +7,7 @@ wheel>=0.29
 # data science
 numpy
 pandas
-scikit-learn
+scipy
 
 # tests/linter
 black
@@ -17,13 +17,23 @@ pytest
 yapf
 
 # API
-gcsfs
-google-cloud-storage
-mlflow
 s3fs
+requests
 
 # utilities
 six>=1.14
 joblib
 memoized-property
 termcolor
+datetime
+python-dotenv
+
+#WEB
+streamlit
+folium
+streamlit_folium
+
+#PLOT
+matplotlib
+seaborn
+
