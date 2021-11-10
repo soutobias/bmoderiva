@@ -12,22 +12,41 @@ def get_data(token):
     start_time = '2021-10-20'
     url=f'http://remobsapi.herokuapp.com/api/v1/tags?start_date={start_time}&end_date={time_now}&token={token}'
 
-    response = requests.get(url).json()
-    df = pd.DataFrame(response)
-    for i in df.columns:
-        try:
-            df[i] = pd.to_numeric(df[i])
-        except:
-            pass
+    try:
+        response = requests.get(url).json()
+        df = pd.DataFrame(response)
+        for i in df.columns:
+            try:
+                df[i] = pd.to_numeric(df[i])
+            except:
+                pass
 
-    df = pd.DataFrame(response)
-    for i in df.columns:
-        try:
-            df[i] = pd.to_numeric(df[i])
-        except:
-            pass
-    df['date_time'] = pd.to_datetime(df['date_time'], format='%Y-%m-%dT%H:%M:%S.000Z')
-    df.sort_values('date_time', inplace=True)
+        df['date_time'] = pd.to_datetime(df['date_time'], format='%Y-%m-%dT%H:%M:%S.000Z')
+        df.sort_values('date_time', inplace=True)
+    except:
+        return pd.DataFrame()
+    return df
+
+def get_data_bmo(token):
+    time_now = (datetime.utcnow() + timedelta(days=1)).strftime('%Y-%m-%d')
+    start_time = (datetime.utcnow() - timedelta(days=3)).strftime('%Y-%m-%d')
+
+
+    url=f'http://remobsapi.herokuapp.com/api/v1/data_buoys?buoy=2&start_date={start_time}&end_date={time_now}&token={token}'
+
+    try:
+        response = requests.get(url).json()
+        df = pd.DataFrame(response)
+        for i in df.columns:
+            try:
+                df[i] = pd.to_numeric(df[i])
+            except:
+                pass
+
+        df['date_time'] = pd.to_datetime(df['date_time'], format='%Y-%m-%dT%H:%M:%S.000Z')
+        df.sort_values('date_time', inplace=True)
+    except:
+        return pd.DataFrame()
 
     return df
 
