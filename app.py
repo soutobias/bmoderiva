@@ -8,6 +8,9 @@ load_dotenv()
 
 df = lib.get_data(os.getenv('REMOBS_TOKEN'))
 df1 = lib.get_data_bmo(os.getenv('REMOBS_TOKEN'))
+mapbox_token = os.getenv("MAPBOX_TOKEN")
+
+
 
 st.write("# BMO-BR DERIVA")
 st.write(f"## DADO TAG")
@@ -26,4 +29,7 @@ else:
     st.write(f"#### {(df1['date_time'].min())} até {(df1['date_time'].max())}")
     st.write(f"#### Última posição: LAT {(df1['lat'].iloc[-1])}, LON {(df1['lon'].iloc[-1])}")
     df1 = lib.calculate_distance(df1)
-    lib.plot_map(df1)
+    df2 = lib.df_time_interval(df1)
+    #lib.plot_map(df1)
+    #st.write("## Histórico de Tempo")
+    lib.plot_map_time(df2, mapbox_token)
